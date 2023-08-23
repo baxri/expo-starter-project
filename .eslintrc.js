@@ -114,7 +114,7 @@ module.exports = {
     'no-use-before-define': 'off',
     // -- Simple import sort
     'simple-import-sort/imports': [
-      'warn',
+      'error',
       {
         groups: [
           // Side effect imports
