@@ -24,7 +24,7 @@ function BottomTabBar({ state, descriptors, navigation }: any) {
     }
   };
 
-  const tabsEl = map(state.routes, (route, index) => {
+  const tabsEl = map(state?.routes, (route, index) => {
     const { options } = descriptors[route.key];
     const isFocused = state.index === index;
 

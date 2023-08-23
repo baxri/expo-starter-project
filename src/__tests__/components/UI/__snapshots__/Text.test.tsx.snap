@@ -15,6 +15,6 @@ exports[`Text renders correctly 1`] = `
     ]
   }
 >
-  Snapshot test!
+  TEXT
 </Text>
 `;
