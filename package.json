@@ -8,9 +8,12 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "postinstall": "patch-package",
-    "lint": "npx eslint 'src/**/*.{js,ts,jsx,tsx}' --fix",
+    "lint": "npx eslint 'src/**/*.{js,ts,jsx,tsx}'",
     "test": "jest",
     "prepare": "husky install"
+  },
+  "hooks": {
+    "pre-commit": "yarn test && yarn lint"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
