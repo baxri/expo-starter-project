@@ -1,0 +1,31 @@
+export default {
+  getStarted: 'Get Started!',
+  alreadyHaveAnAccount: 'Already have an account?',
+  login: 'Sign In',
+  signUp: 'Signup',
+  name: 'Name',
+  email: 'Email',
+  phone: 'Phone',
+  password: 'Password',
+  doNothaveAnAccountYet: 'New member?',
+  alreadyHaveAnAccount: 'Already a member?',
+  bannerSubTitle1: 'Lorem 1 / 3',
+  banner1Title: 'Lorem Ipsum',
+  banner1Description:
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy.',
+  profile: {
+    title: 'Profile Settings',
+    personalInformation: 'Personal Information',
+    emailAddress: 'Email Address',
+    phoneNumber: 'Phone Number',
+    birthDate: 'Birthday',
+    name: 'Name',
+    accountSettings: 'Account Settings',
+    logout: 'Logout',
+    deleteAccount: 'Delete Account',
+    updatePersonalInformation: 'Update personal Information',
+  },
+  bottomTabs: {
+    home: 'Home',
+  },
+};

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text renders correctly 1`] = `
+<Text
+  color="secondary2"
+  fontSize={2}
+  fontWeight={1}
+  style={
+    [
+      {
+        "color": "#555B6E",
+        "fontSize": 16,
+        "fontWeight": "500",
+      },
+    ]
+  }
+>
+  Snapshot test!
+</Text>
+`;

@@ -1,0 +1,24 @@
+{
+  "cli": {
+    "version": ">= 0.52.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "giorgi.bibilashvili89@gmail.com",
+        "ascAppId": "6451120921",
+        "appleTeamId": "3TYL4Z3L3C"
+      }
+    }
+  }
+}

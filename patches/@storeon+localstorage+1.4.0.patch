@@ -1,0 +1,36 @@
+diff --git a/node_modules/@storeon/localstorage/index.d.ts b/node_modules/@storeon/localstorage/index.d.ts
+index 20cd6d8..0f72368 100644
+--- a/node_modules/@storeon/localstorage/index.d.ts
++++ b/node_modules/@storeon/localstorage/index.d.ts
+@@ -6,6 +6,7 @@ declare namespace StoreonLocalStorage {
+     storage?: Storage;
+     serializer?: (object: any) => string;
+     deserializer?: (data: string) => any;
++    onRehydrated?: () => void
+   }
+ }
+ 
+diff --git a/node_modules/@storeon/localstorage/index.js b/node_modules/@storeon/localstorage/index.js
+index aec40e2..6d47ef2 100644
+--- a/node_modules/@storeon/localstorage/index.js
++++ b/node_modules/@storeon/localstorage/index.js
+@@ -23,6 +23,7 @@ let persistState = (paths, config) => {
+   let storage = config.storage || localStorage
+   let serializer = config.serializer || JSON.stringify
+   let deserializer = config.deserializer || JSON.parse
++  let onRehydrated = config.onRehydrated
+ 
+   let onChange = state => {
+     if (paths.length) {
+@@ -52,7 +53,10 @@ let persistState = (paths, config) => {
+       let savedState = storage.getItem(key)
+       if (savedState) {
+         if (typeof savedState.then === 'function') {
+-          savedState.then(value => store.dispatch(event, value))
++          savedState.then(value => {
++            store.dispatch(event, value)
++            onRehydrated?.()
++          })
+         } else {
+           try {
+             return deserializer(savedState)
