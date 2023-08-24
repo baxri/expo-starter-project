@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
 import EyeIcon from 'assets/images/eye.svg';
 import EyeSlashIcon from 'assets/images/eyeSlash.svg';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { DateTime } from 'luxon';
 import { Field, Form } from 'react-final-form';
@@ -22,6 +24,11 @@ import { Column, Row } from 'Components/UI/View';
 
 // IOS 1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com
 
+const iosClientId =
+  '1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com';
+
+WebBrowser.maybeCompleteAuthSession();
+
 enum FormFields {
   Email = 'email',
   Password = 'password',
@@ -37,6 +44,14 @@ interface FormValues {
 function LoginScreen({ navigation }: any) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+
+  // const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  //   // clientId: AuthConfig.clientId,
+  //   // androidClientId: AuthConfig.androindClientId,
+  //   iosClientId,
+  //   // expoClientId: iosClientId,
+  //   // redirectUri: redirectUri,
+  // });
 
   const initialValues = useMemo(
     () => ({
@@ -70,10 +85,6 @@ function LoginScreen({ navigation }: any) {
     (values: any) => validate(values, constraints),
     [constraints],
   );
-
-  const handleGoogleLogin = () => {
-    alert('Google Login');
-  };
 
   const handleFormSubmit = useCallback(
     async ({ email, password }: FormValues) => {
@@ -163,7 +174,7 @@ function LoginScreen({ navigation }: any) {
               loading={submitting}
               mt={6}
               title="Google Login"
-              onPress={handleGoogleLogin}
+              // onPress={promptAsync}
             />
             <Button
               loading={submitting}
