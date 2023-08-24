@@ -49,10 +49,11 @@ module.exports = {
     'prettier/prettier': ['error'],
     // -- TypeScript
     'react-hooks/exhaustive-deps': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'no-console': 'off',
     'react/react-in-jsx-scope': 'off',
     'no-dupe-keys': 'off',
-    'camelcase': 'off',
+    camelcase: 'off',
     'consistent-return': 'off',
     'default-case': 'off',
     '@typescript-eslint/camelcase': 'off',

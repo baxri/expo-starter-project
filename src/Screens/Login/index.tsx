@@ -26,6 +26,8 @@ import { Column, Row } from 'Components/UI/View';
 
 const iosClientId =
   '1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com';
+const clientId =
+  '1079461435271-hieen1oud7egsvp035bg8p8074eprsff.apps.googleusercontent.com';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -45,13 +47,22 @@ function LoginScreen({ navigation }: any) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
-  // const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-  //   // clientId: AuthConfig.clientId,
-  //   // androidClientId: AuthConfig.androindClientId,
-  //   iosClientId,
-  //   // expoClientId: iosClientId,
-  //   // redirectUri: redirectUri,
-  // });
+  const [googleItToken, setGoogleIDToken] = useState('');
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId,
+    // androidClientId: AuthConfig.androindClientId,
+    iosClientId,
+  });
+
+  const handleGoogleLogin = async () => {
+    if (!response || response.type !== 'success') return;
+    const { id_token } = response.params;
+    setGoogleIDToken(id_token);
+  };
+
+  useEffect(() => {
+    handleGoogleLogin();
+  }, [response]);
 
   const initialValues = useMemo(
     () => ({
@@ -157,24 +168,28 @@ function LoginScreen({ navigation }: any) {
                 />
               )}
             </Field>
-            <Row alignCenter>
-              <Text>{t('doNothaveAnAccountYet')}</Text>
-              <Button
-                ml={2}
-                title={t('signUp')}
-                link
-                onPress={() => {
-                  navigation.navigate('Register');
-                }}
-              />
+            <Row mt={5} alignCenter>
+              <Text>GoogleIDTOken: {googleItToken}</Text>
             </Row>
-          </ScrollView>
-          <Column px={5}>
             <Button
               loading={submitting}
               mt={6}
               title="Google Login"
-              // onPress={promptAsync}
+              onPress={() => promptAsync()}
+            />
+            <Button
+              loading={submitting}
+              mt={6}
+              title={t('login')}
+              onPress={handleSubmit}
+            />
+          </ScrollView>
+          {/* <Column px={5}>
+            <Button
+              loading={submitting}
+              mt={6}
+              title="Google Login"
+              onPress={() => promptAsync()}
             />
             <Button
               loading={submitting}
@@ -193,7 +208,7 @@ function LoginScreen({ navigation }: any) {
                 }}
               />
             </Row>
-          </Column>
+          </Column> */}
           <KeyboardSpacer />
         </Column>
       );
