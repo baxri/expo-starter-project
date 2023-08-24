@@ -14,7 +14,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.toothyinsurance"
+      "bundleIdentifier": "com.starterproject"
     },
     "android": {
       "adaptiveIcon": {

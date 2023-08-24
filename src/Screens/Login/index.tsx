@@ -20,6 +20,8 @@ import {
 } from 'Components/UI';
 import { Column, Row } from 'Components/UI/View';
 
+// IOS 1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com
+
 enum FormFields {
   Email = 'email',
   Password = 'password',
@@ -68,6 +70,10 @@ function LoginScreen({ navigation }: any) {
     (values: any) => validate(values, constraints),
     [constraints],
   );
+
+  const handleGoogleLogin = () => {
+    alert('Google Login');
+  };
 
   const handleFormSubmit = useCallback(
     async ({ email, password }: FormValues) => {
@@ -153,6 +159,12 @@ function LoginScreen({ navigation }: any) {
             </Row>
           </ScrollView>
           <Column px={5}>
+            <Button
+              loading={submitting}
+              mt={6}
+              title="Google Login"
+              onPress={handleGoogleLogin}
+            />
             <Button
               loading={submitting}
               mt={6}
