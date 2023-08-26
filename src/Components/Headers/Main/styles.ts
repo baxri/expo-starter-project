@@ -38,9 +38,12 @@ export const HeaderButton = styled.TouchableOpacity.attrs({
 })<HeaderButtonProps>`
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  background: #e1e8ed;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px;
+  gap: 10px;
+  border: 1px solid #e9efff;
+
   ${margin}
 `;

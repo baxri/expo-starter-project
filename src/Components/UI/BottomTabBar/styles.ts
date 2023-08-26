@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { MarginProps } from 'styled-system';
+import { MarginProps, position } from 'styled-system';
 
 import Text from '../Text';
 
@@ -7,23 +7,21 @@ export type ContainerProps = MarginProps;
 
 export const TabTitle = styled(Text)`
   font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  color: #555b6e;
-  margin-top: 5px;
+  font-weight: 700;
+  font-size: 10px;
   text-align: center;
+  letter-spacing: 0.001px;
 `;
 
 export const TabContainer = styled.View`
   display: flex
   flex-direction: row;
   justify-content: space-between;
-  border-top-width: 1px;
-  border-top-color: #D5CED8;
-  background-color: #fff;
   padding-top: 20px;
   padding-bottom: 16.5px;
-  align-items: center;`;
+  align-items: center;
+  position: relative;
+  `;
 
 export const TabButton = styled.TouchableOpacity`
   dispaly: flex;
@@ -31,4 +29,17 @@ export const TabButton = styled.TouchableOpacity`
   align-items: center;
   flex-direction: column;
   flex: 1;
+`;
+
+export const TransferContainer = styled.TouchableOpacity`
+  position: absolute;
+  top: -66px;
+  left: 30%;
+`;
+export const BackgroundImage = styled.ImageBackground`
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 `;

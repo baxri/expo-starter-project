@@ -1,15 +1,18 @@
 import React from 'react';
 import { DrawerActions, StackActions } from '@react-navigation/native';
-import ArrowLeftIcon from 'assets/images/arrowLeft.svg';
-import DentistFilterIcon from 'assets/images/dentistFilter.svg';
-import MenuIcon from 'assets/images/menu.svg';
+import ArrowLeft from 'assets/icons/arrow-left.svg';
+import Deposit from 'assets/icons/deposit.svg';
+import QrScan from 'assets/icons/qr-scan.svg';
+import Settings from 'assets/icons/settings.svg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { SafeAreaView } from 'Services/safeArea';
 
+import { Text } from 'Components/UI';
 import { Column, Row } from 'Components/UI/View';
 
-import { Edge, HeaderButton, RightButton, Title } from './styles';
+import { Edge, HeaderButton } from './styles';
 
 type Props = any & {
   disableMenu?: boolean;
@@ -26,7 +29,9 @@ function MainHeader({
   navigation,
   disableMenu,
   onBackPress,
-  hasFilter,
+  showSettings,
+  showDeposit,
+  showTitle,
 }: Props) {
   const debouncedGoBack = useDebouncedCallback(() => {
     if (onBackPress) {
@@ -50,30 +55,46 @@ function MainHeader({
       <SafeAreaView top />
 
       <Row height="70px" px={5} alignCenter justifyBetween>
-        {!disableMenu && (
-          <Edge>
-            {back ? (
-              <HeaderButton onPress={debouncedGoBack}>
-                <Column alignCenter justifyCenter>
-                  <ArrowLeftIcon fill="#242236" />
-                </Column>
-              </HeaderButton>
-            ) : (
-              <HeaderButton onPress={handleOpenMenu}>
-                <Column size={24} alignCenter justifyCenter>
-                  <MenuIcon fill="#086375" />
-                </Column>
-              </HeaderButton>
-            )}
-          </Edge>
+        <Row alignItems="center">
+          {!disableMenu && (
+            <Edge>
+              {back ? (
+                <HeaderButton onPress={debouncedGoBack}>
+                  <Column alignCenter justifyCenter>
+                    <ArrowLeft />
+                  </Column>
+                </HeaderButton>
+              ) : (
+                <HeaderButton onPress={handleOpenMenu}>
+                  <Column size={24} alignCenter justifyCenter>
+                    <QrScan />
+                  </Column>
+                </HeaderButton>
+              )}
+            </Edge>
+          )}
+          {showTitle && (
+            <Text color="#0F1120" fontSize={2} fontWeight={1} ml={8}>
+              {options.title}
+            </Text>
+          )}
+        </Row>
+        {showSettings && (
+          <HeaderButton onPress={handleOpenMenu}>
+            <Column size={24} alignCenter justifyCenter>
+              <Settings />
+            </Column>
+          </HeaderButton>
         )}
-        <Title>{options.title}</Title>
-        {hasFilter ? (
-          <RightButton onPress={handleFilterClick}>
-            <DentistFilterIcon />
-          </RightButton>
-        ) : (
-          <Edge />
+        {showDeposit && (
+          <TouchableOpacity>
+            <Row alignItems="center">
+              <Deposit />
+              <Text color="#2667FF" fontSize={2} fontWeight={2} ml={3}>
+                Deposit EUR
+              </Text>
+            </Row>
+          </TouchableOpacity>
         )}
       </Row>
     </Column>

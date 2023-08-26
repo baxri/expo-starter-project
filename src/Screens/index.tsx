@@ -1,5 +1,7 @@
 // User screens
 import UserDashboardScreen from './User/Dashboard';
+import UserDepositScreen from './User/Deposit';
+import UserIdentityScreen from './User/Identity';
 import LoadingScreen from './Loading';
 import LoginScreen from './Login';
 import MenuScreen from './Menu';
@@ -15,4 +17,6 @@ export {
 
   // User screens
   UserDashboardScreen,
+  UserIdentityScreen,
+  UserDepositScreen,
 };

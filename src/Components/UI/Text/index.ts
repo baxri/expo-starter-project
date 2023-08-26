@@ -86,7 +86,7 @@ const Text = styled.Text<Props>`
 Text.defaultProps = {
   color: 'secondary2',
   // fontFamily: 'primary',
-  fontSize: 2,
+  fontSize: 1,
   fontWeight: 1,
   // allowFontScaling: false,
 };

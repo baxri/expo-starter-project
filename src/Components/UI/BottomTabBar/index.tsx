@@ -1,12 +1,12 @@
-import { useRef } from 'react';
 import { View } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
+import Transfer from 'assets/images/Tabs/transfer.svg';
 
 import map from 'lodash/map';
 
 import { SafeAreaView } from 'Services/safeArea';
 
-import { TabButton, TabContainer, TabTitle } from './styles';
+import { TabButton, TabContainer, TabTitle, TransferContainer } from './styles';
 
 function BottomTabBar({ state, descriptors, navigation }: any) {
   const handleTabPress = (route: any) => {
@@ -29,18 +29,48 @@ function BottomTabBar({ state, descriptors, navigation }: any) {
     const isFocused = state.index === index;
 
     return (
-      <TabButton key={index} onPress={() => handleTabPress(route)}>
+      <TabButton
+        activeOpacity={0.9}
+        key={index}
+        onPress={() => handleTabPress(route)}
+      >
         {isFocused && <View />}
         <View>
-          {options.tabBarIcon({ color: isFocused ? '#2B5CFF' : '#555B6E' })}
+          {options.tabBarIcon({ color: isFocused ? '#101F48' : '#C5C8D2' })}
         </View>
-        <TabTitle>{options.title}</TabTitle>
+        <TabTitle color={isFocused ? '#101F48' : '#6D758E'}>
+          {options.title}
+        </TabTitle>
       </TabButton>
     );
   });
+
   return (
-    <View style={{ backgroundColor: 'white' }}>
-      <TabContainer>{tabsEl}</TabContainer>
+    <View
+      style={{
+        backgroundColor: '#FBFCFF',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        borderTopWidth: 0.5,
+        borderTopColor: '#EFF5FF',
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+      }}
+    >
+      <TabContainer>
+        {tabsEl}
+        <TransferContainer
+          activeOpacity={0.9}
+          onPress={() => {
+            navigation.navigate('Deposit');
+          }}
+        >
+          <Transfer />
+        </TransferContainer>
+      </TabContainer>
+
       <SafeAreaView bottom />
     </View>
   );

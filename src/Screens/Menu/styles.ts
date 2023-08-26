@@ -25,35 +25,10 @@ export const AvatarContainer = styled.View`
   align-items: center;
 `;
 
-export const Circle = styled.View`
-  border-radius: 100px;
-  width: 86px;
-  height: 86px;
-  overflow: hidden;
-`;
-
-export const Name = styled.Text`
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
-  text-align: center;
-  color: #242236;
-  margin-top: 8px;
-`;
-
-export const Description = styled.Text`
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 25px;
-  text-align: center;
-  color: #555b6e;
-  margin-bottom: 25px;
-`;
-
-export const LinkButton = styled.Text`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 25px;
-  color: #555b6e;
-  margin-bottom: 10px;
+export const CLoseButton = styled.TouchableOpacity`
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  justify-content: center;
+  align-items: center;
 `;

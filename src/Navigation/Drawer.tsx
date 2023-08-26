@@ -15,7 +15,7 @@ function DrawerNavigator() {
         swipeEnabled: false,
         headerShown: false,
         drawerStyle: {
-          width: '90%',
+          width: '100%',
         },
       }}
       detachInactiveScreens

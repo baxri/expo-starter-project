@@ -49,6 +49,7 @@ module.exports = {
     'prettier/prettier': ['error'],
     // -- TypeScript
     'react-hooks/exhaustive-deps': 'off',
+    'global-require': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-console': 'off',
     'react/react-in-jsx-scope': 'off',

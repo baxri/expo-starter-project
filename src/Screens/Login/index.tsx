@@ -10,6 +10,8 @@ import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { validate } from 'validate.js';
 
+import { set, useSession } from 'Services/Store/session';
+
 import Utils from 'Utils';
 import { auth } from 'Utils/firebase';
 
@@ -21,8 +23,6 @@ import {
   TextField,
 } from 'Components/UI';
 import { Column, Row } from 'Components/UI/View';
-
-// IOS 1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com
 
 const iosClientId =
   '1079461435271-q2nu57j4rbiqspu0n1f3iqc2hjc3h8ag.apps.googleusercontent.com';
@@ -46,6 +46,9 @@ interface FormValues {
 function LoginScreen({ navigation }: any) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
+  const session = useSession();
+
+  console.log('session', session);
 
   const [googleItToken, setGoogleIDToken] = useState('');
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
@@ -66,8 +69,8 @@ function LoginScreen({ navigation }: any) {
 
   const initialValues = useMemo(
     () => ({
-      [FormFields.Email]: 'george@gmail.com',
-      [FormFields.Password]: 'gio123456',
+      [FormFields.Email]: '',
+      [FormFields.Password]: '',
       [FormFields.Date]: DateTime.now(),
     }),
     [],
@@ -100,10 +103,11 @@ function LoginScreen({ navigation }: any) {
   const handleFormSubmit = useCallback(
     async ({ email, password }: FormValues) => {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, 'george@gmail.com', 'gio123456');
       } catch (error: any) {
         Alert.alert(error.message);
       }
+      set({ email, isManager: true });
     },
     [],
   );

@@ -1,14 +1,17 @@
 import React from 'react';
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ClaimHistory from 'assets/images/Tabs/claimHistory.svg';
+import Background from 'assets/images/Tabs/background.svg';
 import Home from 'assets/images/Tabs/home.svg';
-import Insurance from 'assets/images/Tabs/insurance.svg';
-import PatientChart from 'assets/images/Tabs/patientChart.svg';
+import Identity from 'assets/images/Tabs/identity.svg';
+import Transfer from 'assets/images/Tabs/transfer.svg';
+import Wallet from 'assets/images/Tabs/wallet.svg';
 import { useTranslation } from 'react-i18next';
+import { backgroundColor } from 'styled-system';
 
-import { UserDashboardScreen } from 'Screens';
+import { UserDashboardScreen, UserIdentityScreen } from 'Screens';
 
-import { AuthHeader } from 'Components/Headers';
+import { AuthHeader, MainHeader } from 'Components/Headers';
 import { BottomTabBar } from 'Components/UI';
 
 const Tab = createBottomTabNavigator();
@@ -17,44 +20,33 @@ function TabNavigator() {
   const { t } = useTranslation();
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Wallet"
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: 'transparent',
+          position: 'absolute',
+          elevation: 0,
+        },
+      }}
       tabBar={(props) => <BottomTabBar {...props} />}
     >
       <Tab.Screen
         component={UserDashboardScreen}
         initialParams={{ isOnboarding: false }}
-        name="Home"
+        name="Wallet"
         options={{
-          tabBarIcon: ({ color }) => <Home fill={color} />,
-          title: t('bottomTabs.home') as string,
-          header: (props) => <AuthHeader {...props} />,
+          tabBarIcon: ({ color }) => <Wallet fill={color} />,
+          title: 'Wallet',
+          header: (props) => <MainHeader {...props} showSettings />,
         }}
       />
       <Tab.Screen
-        component={UserDashboardScreen}
-        name="Test"
+        component={UserIdentityScreen}
+        name="Identity"
         options={{
-          tabBarIcon: ({ color }) => <ClaimHistory fill={color} />,
-          title: t('bottomTabs.home') as string,
-          header: (props) => <AuthHeader {...props} />,
-        }}
-      />
-      <Tab.Screen
-        component={UserDashboardScreen}
-        name="PatientChart"
-        options={{
-          tabBarIcon: ({ color }) => <PatientChart fill={color} />,
-          title: t('bottomTabs.home') as string,
-          header: (props) => <AuthHeader {...props} />,
-        }}
-      />
-      <Tab.Screen
-        component={UserDashboardScreen}
-        name="Insurance"
-        options={{
-          tabBarIcon: ({ color }) => <Insurance fill={color} />,
-          title: t('bottomTabs.home') as string,
-          header: (props) => <AuthHeader {...props} />,
+          tabBarIcon: ({ color }) => <Identity fill={color} />,
+          title: 'Identity',
+          header: (props) => <MainHeader {...props} showSettings />,
         }}
       />
     </Tab.Navigator>

@@ -2,6 +2,10 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
+import DepositScreen from 'Screens/User/Deposit';
+
+import { MainHeader } from 'Components/Headers';
+
 import DrawerNaigator from './Drawer';
 
 const Stack = createNativeStackNavigator();
@@ -18,15 +22,15 @@ function MainNavigator() {
       <Stack.Screen name="DrawerNaigator" {...{ options }}>
         {() => <DrawerNaigator />}
       </Stack.Screen>
-      {/* <Stack.Screen
-        name="SomeTextScreen"
+      <Stack.Screen
+        name="Deposit"
         options={{
-          title: "Screen Title",
-          header: (props: any) => <MainHeader {...props} back />,
+          title: 'Deposit',
+          header: (props: any) => <MainHeader {...props} back showDeposit />,
         }}
       >
-        {() => <ScreenComponent />}
-      </Stack.Screen> */}
+        {() => <DepositScreen />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }
