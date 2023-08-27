@@ -40,25 +40,30 @@ const innerErrorCss: styleFn = ({ error }: InnerProps) =>
 
 export const Inner = styled.View<InnerProps>`
   flex-direction: row;
-  height: ${themeGet('datePicker.inner.height')}px;
-  border-width: ${themeGet('datePicker.inner.borderWidth')}px;
-  border-color: ${mapToTheme('datePicker.inner.borderColor')};
-  border-radius: ${themeGet('datePicker.inner.borderRadius')}px;
-  background-color: ${mapToTheme('datePicker.inner.backgroundColor')};
+  align-items: center;
+  height: ${themeGet('textField.inner.height')}px;
+  border-width: ${themeGet('textField.inner.borderWidth')}px;
+  border-radius: 16px;
+  border-color: #fafafb;
+  background-color: #fafafb;
+  overflow: hidden;
 
   ${innerErrorCss}
 `;
 
 export const ValueContainer = styled.View`
   flex: 1;
-  padding-top: ${themeGet('datePicker.valueContainer.paddingTop')}px;
-  padding-bottom: ${themeGet('datePicker.valueContainer.paddingBottom')}px;
   padding-horizontal: ${themeGet(
     'datePicker.valueContainer.paddingHorizontal',
   )}px;
 `;
 
-export const Value = styled(Text)``;
+export const Value = styled(Text)`
+  padding-top: 7px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  color: black;
+`;
 
 export const AccessoryContainer = styled.View`
   align-items: center;

@@ -17,6 +17,8 @@ import { auth } from 'Utils/firebase';
 
 import {
   Button,
+  DateTimePicker,
+  Dropdown,
   KeyboardSpacer,
   ScrollView,
   Text,
@@ -35,12 +37,14 @@ enum FormFields {
   Email = 'email',
   Password = 'password',
   Date = 'date',
+  Type = 'type',
 }
 
 interface FormValues {
   [FormFields.Email]: string;
   [FormFields.Password]: string;
   [FormFields.Date]: string;
+  [FormFields.Type]: string;
 }
 
 function LoginScreen({ navigation }: any) {
@@ -68,6 +72,7 @@ function LoginScreen({ navigation }: any) {
     () => ({
       [FormFields.Email]: '',
       [FormFields.Password]: '',
+      [FormFields.Type]: 'development',
       [FormFields.Date]: DateTime.now(),
     }),
     [],
@@ -117,11 +122,30 @@ function LoginScreen({ navigation }: any) {
       return (
         <Column bg="white" stretch>
           <ScrollView keyboardShouldPersistTaps="handled" px={5} py={6}>
-            {/* <Field name={FormFields.Date}>
+            <Field name={FormFields.Type}>
               {({ input: { value, onChange } }) => (
-                <DateTimePicker mb={6} value={value} onChange={onChange} />
+                <Dropdown
+                  label="Server type"
+                  mb={6}
+                  options={[
+                    { title: 'Production', id: 'production' },
+                    { title: 'Development', id: 'development' },
+                  ]}
+                  value={value}
+                  onChange={onChange}
+                />
               )}
-            </Field> */}
+            </Field>
+            <Field name={FormFields.Date}>
+              {({ input: { value, onChange } }) => (
+                <DateTimePicker
+                  label="Date"
+                  mb={6}
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            </Field>
             <Field name={FormFields.Email}>
               {({ input: { value, onChange } }) => (
                 <TextField

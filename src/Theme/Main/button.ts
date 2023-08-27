@@ -2,18 +2,18 @@ import palette from './palette';
 
 export default {
   inner: {
-    height: 50,
+    height: 52,
     minWidth: 56,
-    borderRadius: 8,
+    borderRadius: 100,
 
     backgroundColor: {
       secondary: palette.secondary4,
-      default: palette.primary3,
+      default: '#2667FF',
     },
     pressed: {
       backgroundColor: {
         secondary: palette.primary2,
-        default: palette.primary3,
+        default: '#2667FF',
       },
     },
     disabled: {
@@ -24,9 +24,9 @@ export default {
     },
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
     lineHeight: 24,
-    fontWeight: 600,
+    fontWeight: 700,
 
     color: {
       secondary: palette.secondary1,

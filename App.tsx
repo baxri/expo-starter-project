@@ -15,6 +15,8 @@ import Navigation from 'Navigation';
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
   'ColorPropType will be removed',
+  'shadow',
+  'Node of type',
 ]);
 
 export default function App() {

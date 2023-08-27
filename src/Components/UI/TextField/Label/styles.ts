@@ -11,7 +11,6 @@ type ContainerProps = {
 
 export const Container = styled.View<ContainerProps>`
   flex-direction: row;
-  margin-bottom: 8px;
 `;
 
 type ValueProps = {
@@ -22,7 +21,7 @@ export const Value = styled(Text).attrs({
   numberOfLines: 1,
 })<ValueProps>`
   font-weight: 500;
-  font-size: 16px;
-  line-height: 18px;
-  color: #555b6e;
+  font-size: 12px;
+  line-height: 15px;
+  color: #6d758e;
 `;

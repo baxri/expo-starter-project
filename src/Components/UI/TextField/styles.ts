@@ -28,24 +28,27 @@ type InnerProps = {
 const innerFocusedCss: styleFn = ({ focused }: InnerProps) =>
   focused &&
   css`
-    border-color: ${themeGet('textField.inner.focused.borderColor')};
+    border-color: #d4e1ff;
+    background-color: #eff5ff;
   `;
 
 const innerErrorCss: styleFn = ({ error }: InnerProps) =>
   !!error &&
   css`
-    border-color: ${themeGet('textField.inner.error.borderColor')};
-    border-width: ${themeGet('textField.inner.borderWidth')}px;
+    border-color: red;
   `;
 
 export const Inner = styled.View<InnerProps>`
   flex-direction: row;
   align-items: center;
   height: ${themeGet('textField.inner.height')}px;
-  border-radius: ${themeGet('textField.inner.borderRadius')}px;
-  background-color: ${themeGet('textField.inner.backgroundColor.default')};
+  border-width: ${themeGet('textField.inner.borderWidth')}px;
+  border-radius: 16px;
+  border-color: #fafafb;
+  background-color: #fafafb;
   overflow: hidden;
 
+  ${innerFocusedCss}
   ${innerErrorCss}
 `;
 
@@ -70,18 +73,18 @@ const getInputPlaceholderTextColor = ({ theme }: InputProps): string =>
 export const Input = styled.TextInput.attrs((props: InputProps) => ({
   color: getInputColor(props),
   selectionColor: getInputSelectionColor(props),
-  placeholderTextColor: getInputPlaceholderTextColor(props),
+  placeholderTextColor: '#C5C8D2',
   editable: !props.disabled,
   allowFontScaling: false,
 }))<InputProps>`
   flex: 1;
-  padding-top: ${themeGet('textField.input.paddingBottom')}px;
-  padding-bottom: ${themeGet('textField.input.paddingBottom')}px;
+  padding-top: 7px;
+  padding-bottom: 5px;
   padding-left: ${mapToTheme('textField.input.paddingLeft')}px;
   padding-right: ${mapToTheme('textField.input.paddingRight')}px;
-  font-size: ${themeGet('textField.input.fontSize')}px;
+  font-size: 16px;
+  color: black;
 `;
-// font-family: ${themeGet('textField.input.fontFamily')};
 
 export const StyledFieldHelper = styled(FieldHelper)`
   margin-top: ${themeGet('textField.fieldHelper.marginTop')}px;

@@ -35,7 +35,7 @@ function DashboardScreen({ navigation }: any) {
     <Column backgroundColor="background" stretch>
       <ScrollView keyboardShouldPersistTaps="handled" px={5} py={6}>
         <Text>DASHBOARD</Text>
-        <Button title="Create Todo" onPress={createTodoHandler} />
+        <Button title="Open a bank account" onPress={createTodoHandler} />
       </ScrollView>
     </Column>
   );

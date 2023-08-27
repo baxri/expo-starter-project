@@ -6,10 +6,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { TextInputProps } from 'react-native';
+import { TextInput as TextInputNative, TextInputProps } from 'react-native';
 // @ts-ignore
 import { omit, pick } from '@styled-system/props';
 
+import Text from '../Text';
+import { Column, Row } from '../View';
 import Accessory from './Accessory';
 import Label from './Label';
 import {
@@ -97,28 +99,30 @@ const TextField = forwardRef<Ref, Props>(
 
     return (
       <Container {...pick(rest)}>
-        {label ? (
-          <Label disabled={disabled} label={label} required={required} />
-        ) : null}
         <Inner disabled={disabled} error={error} focused={focused}>
-          <Stack>
-            {startAccessory}
-
-            <Input
-              {...omit(rest)}
-              disabled={disabled}
-              hasEndAccessory={!!endAccessory}
-              hasStartAccessory={!!startAccessory}
-              placeholder={focused ? placeholder : ''}
-              ref={inputRef}
-              value={value}
-              onBlur={handleBlur}
-              onChangeText={handleChange}
-              onFocus={handleFocus}
-            />
-
-            {endAccessory}
-          </Stack>
+          <Column py={5} stretch>
+            {label ? (
+              <Row ml={5}>
+                <Label disabled={disabled} label={label} required={required} />
+              </Row>
+            ) : null}
+            <Stack>
+              {startAccessory}
+              <Input
+                {...omit(rest)}
+                disabled={disabled}
+                hasEndAccessory={!!endAccessory}
+                hasStartAccessory={!!startAccessory}
+                placeholder={placeholder}
+                ref={inputRef}
+                value={value}
+                onBlur={handleBlur}
+                onChangeText={handleChange}
+                onFocus={handleFocus}
+              />
+            </Stack>
+          </Column>
+          <Column>{endAccessory}</Column>
         </Inner>
 
         {helper || typeof error === 'string' ? (

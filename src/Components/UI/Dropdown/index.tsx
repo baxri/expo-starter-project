@@ -5,6 +5,7 @@ import isNil from 'lodash/isNil';
 
 import ListSheet from 'Components/UI/ListSheet';
 
+import { Column, Row } from '../View';
 import Label from './Label';
 import {
   Chevron,
@@ -63,24 +64,30 @@ function Dropdown({
   return (
     <Container {...rest} onPress={() => setSheetVisible(true)}>
       <Inner error={error}>
-        {!!label && (
-          <Label
-            active={!!selectedOption}
-            disabled={disabled}
-            label={label}
-            required={required}
-          />
-        )}
-
-        <ValueContainer>
-          {selectedOption && (
-            <Value numberOfLines={1}>{selectedOption.title}</Value>
+        <Column py={5} stretch>
+          {!!label && (
+            <Row ml={5}>
+              <Label
+                active={!!selectedOption}
+                disabled={disabled}
+                label={label}
+                required={required}
+              />
+            </Row>
           )}
-        </ValueContainer>
 
-        <ChevronContainer>
-          <Chevron />
-        </ChevronContainer>
+          <ValueContainer>
+            {selectedOption && (
+              <Value numberOfLines={1}>{selectedOption.title}</Value>
+            )}
+          </ValueContainer>
+        </Column>
+
+        <Column>
+          <ChevronContainer>
+            <Chevron />
+          </ChevronContainer>
+        </Column>
       </Inner>
 
       {helper || typeof error === 'string' ? (

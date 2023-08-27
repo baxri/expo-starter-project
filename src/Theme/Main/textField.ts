@@ -3,7 +3,7 @@ import palette from './palette';
 
 export default {
   inner: {
-    height: 56,
+    height: 80,
     borderWidth: 1,
     borderRadius: 8,
 

@@ -77,9 +77,9 @@ function ListSheet({
           <FlatList data={options} pt={5} px={5} renderItem={renderOption} />
         )}
 
-        <Column p={5}>
+        {/* <Column p={5}>
           <Button title="Cancel" secondary onPress={handleClose} />
-        </Column>
+        </Column> */}
 
         <SafeAreaView bottom />
         <KeyboardSpacer topSpacing={-bottom} />

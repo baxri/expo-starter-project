@@ -1,5 +1,5 @@
 import themeGet from '@styled-system/theme-get';
-import ChevronDownIcon from 'assets/images/chevronDown.svg';
+import ChevronDownIcon from 'assets/icons/dropdown-icon.svg';
 import styled, { css } from 'styled-components/native';
 import { mapToTheme } from 'styled-map';
 import { margin, MarginProps, styleFn } from 'styled-system';
@@ -34,30 +34,35 @@ type InnerProps = {
 const innerErrorCss: styleFn = ({ error }: InnerProps) =>
   !!error &&
   css`
-    border-color: ${themeGet('dropdown.inner.error.borderColor')};
+    border-color: red;
   `;
 
 export const Inner = styled.View<InnerProps>`
   flex-direction: row;
-  height: ${themeGet('dropdown.inner.height')}px;
-  border-width: ${themeGet('dropdown.inner.borderWidth')}px;
-  border-color: ${mapToTheme('dropdown.inner.borderColor')};
-  border-radius: ${themeGet('dropdown.inner.borderRadius')}px;
-  background-color: ${mapToTheme('dropdown.inner.backgroundColor')};
+  align-items: center;
+  height: ${themeGet('textField.inner.height')}px;
+  border-width: ${themeGet('textField.inner.borderWidth')}px;
+  border-radius: 16px;
+  border-color: #fafafb;
+  background-color: #fafafb;
+  overflow: hidden;
 
   ${innerErrorCss}
 `;
 
 export const ValueContainer = styled.View`
   flex: 1;
-  padding-top: ${themeGet('dropdown.valueContainer.paddingTop')}px;
-  padding-bottom: ${themeGet('dropdown.valueContainer.paddingBottom')}px;
   padding-horizontal: ${themeGet(
-    'dropdown.valueContainer.paddingHorizontal',
+    'datePicker.valueContainer.paddingHorizontal',
   )}px;
 `;
 
-export const Value = styled(Text)``;
+export const Value = styled(Text)`
+  padding-top: 7px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  color: black;
+`;
 
 export const ChevronContainer = styled.View`
   align-items: center;

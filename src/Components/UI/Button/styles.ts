@@ -50,6 +50,12 @@ export const Inner = styled.View<InnerProps>`
   ${innerLinkCss}
 `;
 
+// elevation: 8; /* Android elevation */
+// shadow-color: #2667ff; /* iOS shadow color */
+// shadow-offset: { width: 0, height: 8 }; /* iOS shadow offset */
+// shadow-opacity: 0.4; /* iOS shadow opacity */
+// shadow-radius: 15; /* iOS shadow radius */
+
 type TitleProps = {
   disabled?: boolean;
   pressed?: boolean;

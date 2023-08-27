@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { DateTime } from 'luxon';
 
+import { Column, Row } from '../View';
 import Label from './Label';
 import Sheet from './Sheet';
 import {
@@ -58,16 +59,22 @@ function DateTimePicker({
   return (
     <Container {...rest} onPress={() => setSheetVisible(true)}>
       <Inner error={error}>
-        {!!label && (
-          <Label
-            active={!!valueStr}
-            disabled={disabled}
-            label={label}
-            required={required}
-          />
-        )}
+        <Column py={5} stretch>
+          {!!label && (
+            <Row ml={5}>
+              <Label
+                active={!!valueStr}
+                disabled={disabled}
+                label={label}
+                required={required}
+              />
+            </Row>
+          )}
 
-        <ValueContainer>{valueStr && <Value>{valueStr}</Value>}</ValueContainer>
+          <ValueContainer>
+            {valueStr && <Value>{valueStr}</Value>}
+          </ValueContainer>
+        </Column>
         <AccessoryContainer>
           {time ? <TimeAccessory /> : <DateAccessory />}
         </AccessoryContainer>
