@@ -18,6 +18,7 @@ module.exports = function (api) {
             Screens: './src/Screens',
             Hooks: './src/Hooks',
             Translations: './src/Translations',
+            Api: './src/Api',
           },
         },
       ],

@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import React, { useEffect, useState } from 'react';
+import { LogBox } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   initialWindowMetrics,
   SafeAreaProvider,
-} from "react-native-safe-area-context";
-import { createStore, Store } from "Services/Store";
-import { StoreContext } from "storeon/react";
+} from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { StoreContext } from 'storeon/react';
 
-import Navigation from "Navigation";
+import { createStore, Store } from 'Services/Store';
 
-import { LogBox } from "react-native";
+import Navigation from 'Navigation';
 
 LogBox.ignoreLogs([
-  "ViewPropTypes will be removed",
-  "ColorPropType will be removed",
+  'ViewPropTypes will be removed',
+  'ColorPropType will be removed',
 ]);
 
 export default function App() {
   const [rehydrated, setRehydrated] = useState(false);
   const [store, setStore] = useState<Store>();
+  const [queryClient, setQueryClient] = useState<QueryClient>();
 
   useEffect(() => {
     async function initialize() {
@@ -28,8 +29,11 @@ export default function App() {
         // SplashScreen.hide()
       };
 
+      const nextQueryClient = new QueryClient();
+
       const nextStore = createStore({ onRehydrated });
       setStore(nextStore);
+      setQueryClient(nextQueryClient);
     }
 
     initialize().catch(() => {
@@ -37,18 +41,20 @@ export default function App() {
     });
   }, []);
 
-  if (!store || !rehydrated) {
+  if (!store || !rehydrated || !queryClient) {
     return null;
   }
 
   return (
-    <StoreContext.Provider value={store}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <GestureHandlerRootView style={GestureHandlerRootViewStyle}>
-          <Navigation />
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </StoreContext.Provider>
+    <QueryClientProvider client={queryClient as QueryClient}>
+      <StoreContext.Provider value={store}>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <GestureHandlerRootView style={GestureHandlerRootViewStyle}>
+            <Navigation />
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </StoreContext.Provider>
+    </QueryClientProvider>
   );
 }
 

@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { onAuthStateChanged } from 'firebase/auth';
 
+import { useSession } from 'Services/Store/session';
+
 import { auth } from 'Utils/firebase';
 
 import { LoadingScreen } from 'Screens';
@@ -12,27 +14,14 @@ import MainNavigator from './Main';
 const Stack = createNativeStackNavigator();
 
 function RootNavigator() {
-  const [initializing, setInitializing] = useState(true);
-  const [isAuth, setIsAuth] = useState(false);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setInitializing(false);
-      if (user) {
-        const { uid } = user;
-        setIsAuth(true);
-      } else {
-        setIsAuth(false);
-      }
-    });
-  }, []);
+  const { idToken } = useSession();
 
   const routes = useMemo(() => {
-    if (initializing) {
-      return <Stack.Screen component={LoadingScreen} name="LoadingScreen" />;
-    }
+    // if (initializing) {
+    //   return <Stack.Screen component={LoadingScreen} name="LoadingScreen" />;
+    // }
 
-    if (!isAuth) {
+    if (!idToken) {
       return (
         <Stack.Screen
           component={AuthNavigator}
@@ -45,7 +34,7 @@ function RootNavigator() {
     }
 
     return <Stack.Screen component={MainNavigator} name="MainNavigator" />;
-  }, [isAuth, initializing]);
+  }, [idToken]);
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

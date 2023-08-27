@@ -10,7 +10,7 @@ import { Field, Form } from 'react-final-form';
 import { useTranslation } from 'react-i18next';
 import { validate } from 'validate.js';
 
-import { set, useSession } from 'Services/Store/session';
+import { setIdToken } from 'Services/Store/session';
 
 import Utils from 'Utils';
 import { auth } from 'Utils/firebase';
@@ -46,9 +46,6 @@ interface FormValues {
 function LoginScreen({ navigation }: any) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
-  const session = useSession();
-
-  console.log('session', session);
 
   const [googleItToken, setGoogleIDToken] = useState('');
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
@@ -103,11 +100,10 @@ function LoginScreen({ navigation }: any) {
   const handleFormSubmit = useCallback(
     async ({ email, password }: FormValues) => {
       try {
-        await signInWithEmailAndPassword(auth, 'george@gmail.com', 'gio123456');
+        setIdToken('j34h5bj3h45bhj345bjh34b5jh345hj34b5jh34b5jh34');
       } catch (error: any) {
         Alert.alert(error.message);
       }
-      set({ email, isManager: true });
     },
     [],
   );
@@ -172,19 +168,19 @@ function LoginScreen({ navigation }: any) {
                 />
               )}
             </Field>
-            <Row mt={5} alignCenter>
+            {/* <Row mt={5} alignCenter>
               <Text>GoogleIDTOken: {googleItToken}</Text>
-            </Row>
-            <Button
+            </Row> */}
+            {/* <Button
               loading={submitting}
               mt={6}
               title="Google Login"
               onPress={() => promptAsync()}
-            />
+            /> */}
             <Button
               loading={submitting}
               mt={6}
-              title={t('login')}
+              title="Set Test Id Token"
               onPress={handleSubmit}
             />
           </ScrollView>

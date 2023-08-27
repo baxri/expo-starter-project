@@ -3,10 +3,10 @@ import ms from 'ms';
 
 import merge from 'lodash/merge';
 
-import { getAccessToken } from 'Services/Store/session';
+import { getItToken } from 'Services/Store/session';
 
 const request = axios.create({
-  baseURL: 'http://localhost:4001',
+  baseURL: 'https://jsonplaceholder.typicode.com',
   timeout: ms('5s'),
   headers: {
     'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config: any) => {
-  const token = getAccessToken();
+  const token = getItToken();
 
   return merge({}, config, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
