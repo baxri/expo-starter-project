@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert } from 'react-native';
 import EyeIcon from 'assets/images/eye.svg';
 import EyeSlashIcon from 'assets/images/eyeSlash.svg';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import { makeRedirectUri } from 'expo-auth-session';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -56,17 +58,22 @@ function LoginScreen({ navigation }: any) {
     clientId,
     // androidClientId: AuthConfig.androindClientId,
     iosClientId,
+    // redirectUri: makeRedirectUri({
+    //   useProxy: true,
+    //   // scheme: 'https://auth.expo.io/@asidorov01/blapp'
+    //   scheme: 'https://auth.expo.io/@baxri/starter-project',
+    // }),
   });
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = useCallback(async () => {
     if (!response || response.type !== 'success') return;
     const { id_token } = response.params;
     setGoogleIDToken(id_token);
-  };
+  }, [response, promptAsync]);
 
   useEffect(() => {
     handleGoogleLogin();
-  }, [response]);
+  }, [handleGoogleLogin]);
 
   const initialValues = useMemo(
     () => ({
@@ -192,15 +199,37 @@ function LoginScreen({ navigation }: any) {
                 />
               )}
             </Field>
-            {/* <Row mt={5} alignCenter>
-              <Text>GoogleIDTOken: {googleItToken}</Text>
-            </Row> */}
-            {/* <Button
+            <Button
               loading={submitting}
               mt={6}
               title="Google Login"
               onPress={() => promptAsync()}
-            /> */}
+            />
+            <Button
+              loading={submitting}
+              mt={6}
+              title="Apple Login"
+              onPress={async () => {
+                try {
+                  const credential = await AppleAuthentication.signInAsync({
+                    requestedScopes: [
+                      AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                      AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                    ],
+                  });
+
+                  console.log('credential', credential.identityToken);
+                  // signed in
+                } catch (e: any) {
+                  if (e.code === 'ERR_REQUEST_CANCELED') {
+                    // handle that the user canceled the sign-in flow
+                  } else {
+                    // handle other errors
+                  }
+                }
+              }}
+            />
+
             <Button
               loading={submitting}
               mt={6}
